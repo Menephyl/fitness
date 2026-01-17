@@ -31,94 +31,97 @@ export const LeadForm = () => {
     };
 
     return (
-        <section id="lead-form" className="py-24 bg-zinc-900/50 relative">
+        <section id="lead-form" className="py-24 bg-zinc-950 relative">
             <div className="container mx-auto px-4 max-w-4xl">
-                <div className="bg-zinc-950/80 backdrop-blur-sm border border-zinc-800 rounded-3xl p-8 lg:p-12 shadow-2xl relative overflow-hidden">
-                    {/* Decorative gradients */}
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
+                {/* Glowing border effect container */}
+                <div className="relative group rounded-3xl p-0.5 bg-linear-to-br from-zinc-800 via-primary/50 to-zinc-800 hover:from-primary hover:via-accent hover:to-primary transition-all duration-700">
+                    <div className="bg-zinc-950/90 backdrop-blur-xl rounded-[23px] p-8 lg:p-12 shadow-2xl relative overflow-hidden h-full">
+                        {/* Decorative gradients */}
+                        <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen" />
+                        <div className="absolute bottom-0 left-0 w-80 h-80 bg-accent/10 rounded-full blur-[100px] pointer-events-none mix-blend-screen" />
 
-                    <div className="relative z-10 text-center mb-10">
-                        <h2 className="text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400">
-                            {isSuccess ? "Sucesso!" : "Comece sua Transformação Hoje"}
-                        </h2>
-                        <p className="text-zinc-400 mt-2">
-                            {isSuccess
-                                ? "Verifique sua caixa de entrada para acessar o conteúdo."
-                                : "Preencha seus dados abaixo para receber o material gratuitamente."}
-                        </p>
-                    </div>
+                        <div className="relative z-10 text-center mb-10">
+                            <h2 className="text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-zinc-400">
+                                {isSuccess ? "Sucesso!" : "Comece sua Transformação Hoje"}
+                            </h2>
+                            <p className="text-zinc-400 mt-3 text-lg">
+                                {isSuccess
+                                    ? "Verifique sua caixa de entrada para acessar o conteúdo."
+                                    : "Preencha seus dados abaixo para receber o material gratuitamente."}
+                            </p>
+                        </div>
 
-                    <div className="w-full max-w-md mx-auto min-h-[300px] flex items-center justify-center">
-                        <AnimatePresence mode="wait">
-                            {!isSuccess ? (
-                                <Motion.form
-                                    key="form"
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -20 }}
-                                    transition={{ duration: 0.4 }}
-                                    onSubmit={handleSubmit(onSubmit)}
-                                    className="space-y-6 w-full"
-                                >
-                                    <Input
-                                        label="Nome Completo"
-                                        placeholder="Seu nome"
-                                        error={errors.name}
-                                        {...register("name")}
-                                    />
-                                    <Input
-                                        label="E-mail"
-                                        type="email"
-                                        placeholder="seu@email.com"
-                                        error={errors.email}
-                                        {...register("email")}
-                                    />
-
-                                    <Button
-                                        type="submit"
-                                        disabled={isSubmitting}
-                                        className="w-full"
+                        <div className="w-full max-w-md mx-auto min-h-[300px] flex items-center justify-center">
+                            <AnimatePresence mode="wait">
+                                {!isSuccess ? (
+                                    <Motion.form
+                                        key="form"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.4 }}
+                                        onSubmit={handleSubmit(onSubmit)}
+                                        className="space-y-6 w-full"
                                     >
-                                        {isSubmitting ? (
-                                            <span className="flex items-center gap-2">
-                                                <span className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                                                Enviando...
-                                            </span>
-                                        ) : (
-                                            <span className="flex items-center gap-2">
-                                                Receber Ebook Grátis <Send size={18} />
-                                            </span>
-                                        )}
-                                    </Button>
-                                </Motion.form>
-                            ) : (
-                                <Motion.div
-                                    key="success"
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ type: "spring", duration: 0.6 }}
-                                    className="text-center space-y-6"
-                                >
-                                    <div className="w-24 h-24 bg-green-500/10 rounded-full flex items-center justify-center mx-auto border border-green-500/20">
-                                        <CheckCircle2 className="w-12 h-12 text-green-500" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <h3 className="text-xl font-semibold text-white">E-mail Enviado!</h3>
-                                        <p className="text-zinc-400 text-sm">
-                                            O guia "Body & Food" já está a caminho do email cadastrado.
-                                        </p>
-                                    </div>
-                                    <Button
-                                        variant="secondary"
-                                        onClick={() => setIsSuccess(false)} // Reset for demo purposes
-                                        className="mt-4"
+                                        <Input
+                                            label="Nome Completo"
+                                            placeholder="Seu nome"
+                                            error={errors.name}
+                                            {...register("name")}
+                                        />
+                                        <Input
+                                            label="E-mail"
+                                            type="email"
+                                            placeholder="seu@email.com"
+                                            error={errors.email}
+                                            {...register("email")}
+                                        />
+
+                                        <Button
+                                            type="submit"
+                                            disabled={isSubmitting}
+                                            className="w-full py-4 text-lg shadow-lg shadow-primary/25 bg-linear-to-r from-primary to-primary hover:to-accent border-0"
+                                        >
+                                            {isSubmitting ? (
+                                                <span className="flex items-center gap-2">
+                                                    <span className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                                                    Enviando...
+                                                </span>
+                                            ) : (
+                                                <span className="flex items-center gap-2">
+                                                    Receber Ebook Grátis <Send size={18} />
+                                                </span>
+                                            )}
+                                        </Button>
+                                    </Motion.form>
+                                ) : (
+                                    <Motion.div
+                                        key="success"
+                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ type: "spring", duration: 0.6 }}
+                                        className="text-center space-y-6"
                                     >
-                                        Enviar para outro e-mail
-                                    </Button>
-                                </Motion.div>
-                            )}
-                        </AnimatePresence>
+                                        <div className="w-24 h-24 bg-green-500/10 rounded-full flex items-center justify-center mx-auto border border-green-500/20">
+                                            <CheckCircle2 className="w-12 h-12 text-green-500" />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <h3 className="text-xl font-semibold text-white">E-mail Enviado!</h3>
+                                            <p className="text-zinc-400 text-sm">
+                                                O guia "Body & Food" já está a caminho do email cadastrado.
+                                            </p>
+                                        </div>
+                                        <Button
+                                            variant="secondary"
+                                            onClick={() => setIsSuccess(false)} // Reset for demo purposes
+                                            className="mt-4"
+                                        >
+                                            Enviar para outro e-mail
+                                        </Button>
+                                    </Motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
                     </div>
                 </div>
             </div>
